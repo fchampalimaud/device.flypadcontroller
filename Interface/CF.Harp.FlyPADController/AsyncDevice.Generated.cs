@@ -1,15 +1,15 @@
-using Bonsai.Harp;
+﻿using Bonsai.Harp;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Harp.FlyPAD
+namespace CF.Harp.FlyPADController
 {
     /// <inheritdoc/>
     public partial class Device
     {
         /// <summary>
         /// Initializes a new instance of the asynchronous API to configure and interface
-        /// with FlyPAD devices on the specified serial port.
+        /// with FlyPADController devices on the specified serial port.
         /// </summary>
         /// <param name="portName">
         /// The name of the serial port used to communicate with the Harp device.
@@ -29,7 +29,7 @@ namespace Harp.FlyPAD
             if (whoAmI != Device.WhoAmI)
             {
                 var errorMessage = string.Format(
-                    "The device ID {1} on {0} was unexpected. Check whether a FlyPAD device is connected to the specified serial port.",
+                    "The device ID {1} on {0} was unexpected. Check whether a FlyPADController device is connected to the specified serial port.",
                     portName, whoAmI);
                 throw new HarpException(errorMessage);
             }
@@ -39,7 +39,7 @@ namespace Harp.FlyPAD
     }
 
     /// <summary>
-    /// Represents an asynchronous API to configure and interface with FlyPAD devices.
+    /// Represents an asynchronous API to configure and interface with FlyPADController devices.
     /// </summary>
     public partial class AsyncDevice : Bonsai.Harp.AsyncDevice
     {

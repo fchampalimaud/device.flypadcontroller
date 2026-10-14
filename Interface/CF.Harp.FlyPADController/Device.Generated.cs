@@ -1,4 +1,4 @@
-using Bonsai;
+﻿using Bonsai;
 using Bonsai.Harp;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Xml.Serialization;
 
-namespace Harp.FlyPAD
+namespace CF.Harp.FlyPADController
 {
     /// <summary>
     /// Generates events and processes commands for the FlyPAD device connected
@@ -15,11 +15,11 @@ namespace Harp.FlyPAD
     /// </summary>
     [Combinator(MethodName = nameof(Generate))]
     [WorkflowElementCategory(ElementCategory.Source)]
-    [Description("Generates events and processes commands for the FlyPAD device.")]
+    [Description("Generates events and processes commands for the FlyPADController device.")]
     public partial class Device : Bonsai.Harp.Device, INamedElement
     {
         /// <summary>
-        /// Represents the unique identity class of the <see cref="FlyPAD"/> device.
+        /// Represents the unique identity class of the <see cref="FlyPADController"/> device.
         /// This field is constant.
         /// </summary>
         public const int WhoAmI = 1201;
@@ -29,7 +29,7 @@ namespace Harp.FlyPAD
         /// </summary>
         public Device() : base(WhoAmI) { }
 
-        string INamedElement.Name => nameof(FlyPAD);
+        string INamedElement.Name => nameof(FlyPADController);
 
         /// <summary>
         /// Gets a read-only mapping from address to register type.
@@ -48,7 +48,7 @@ namespace Harp.FlyPAD
         };
 
         /// <summary>
-        /// Gets the contents of the metadata file describing the <see cref="FlyPAD"/>
+        /// Gets the contents of the metadata file describing the <see cref="FlyPADController"/>
         /// device registers.
         /// </summary>
         public static readonly string Metadata = GetDeviceMetadata();
@@ -64,14 +64,14 @@ namespace Harp.FlyPAD
 
     /// <summary>
     /// Represents an operator that returns the contents of the metadata file
-    /// describing the <see cref="FlyPAD"/> device registers.
+    /// describing the <see cref="FlyPADController"/> device registers.
     /// </summary>
     [Description("Returns the contents of the metadata file describing the FlyPAD device registers.")]
     public partial class GetDeviceMetadata : Source<string>
     {
         /// <summary>
         /// Returns an observable sequence with the contents of the metadata file
-        /// describing the <see cref="FlyPAD"/> device registers.
+        /// describing the <see cref="FlyPADController"/> device registers.
         /// </summary>
         /// <returns>
         /// A sequence with a single <see cref="string"/> object representing the
@@ -84,19 +84,19 @@ namespace Harp.FlyPAD
     }
 
     /// <summary>
-    /// Represents an operator that groups the sequence of <see cref="FlyPAD"/>" messages by register type.
+    /// Represents an operator that groups the sequence of <see cref="FlyPADController"/>" messages by register type.
     /// </summary>
     [Description("Groups the sequence of FlyPAD messages by register type.")]
     public partial class GroupByRegister : Combinator<HarpMessage, IGroupedObservable<Type, HarpMessage>>
     {
         /// <summary>
-        /// Groups an observable sequence of <see cref="FlyPAD"/> messages
+        /// Groups an observable sequence of <see cref="FlyPADController"/> messages
         /// by register type.
         /// </summary>
         /// <param name="source">The sequence of Harp device messages.</param>
         /// <returns>
         /// A sequence of observable groups, each of which corresponds to a unique
-        /// <see cref="FlyPAD"/> register.
+        /// <see cref="FlyPADController"/> register.
         /// </returns>
         public override IObservable<IGroupedObservable<Type, HarpMessage>> Process(IObservable<HarpMessage> source)
         {
@@ -105,7 +105,7 @@ namespace Harp.FlyPAD
     }
 
     /// <summary>
-    /// Represents an operator that writes the sequence of <see cref="FlyPAD"/>" messages
+    /// Represents an operator that writes the sequence of <see cref="FlyPADController"/>" messages
     /// to the standard Harp storage format.
     /// </summary>
     [DefaultProperty(nameof(Path))]
@@ -116,7 +116,7 @@ namespace Harp.FlyPAD
         const string MetadataFileName = "device.yml";
         readonly Bonsai.Harp.MessageWriter writer = new();
 
-        string INamedElement.Name => nameof(FlyPAD) + "DataWriter";
+        string INamedElement.Name => nameof(FlyPADController) + "DataWriter";
 
         /// <summary>
         /// Gets or sets the relative or absolute path on which to save the message data.
@@ -126,7 +126,7 @@ namespace Harp.FlyPAD
         public string Path
         {
             get => System.IO.Path.GetDirectoryName(writer.FileName);
-            set => writer.FileName = System.IO.Path.Combine(value, nameof(FlyPAD) + BinaryExtension);
+            set => writer.FileName = System.IO.Path.Combine(value, nameof(FlyPADController) + BinaryExtension);
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace Harp.FlyPAD
 
     /// <summary>
     /// Represents an operator that filters register-specific messages
-    /// reported by the <see cref="FlyPAD"/> device.
+    /// reported by the <see cref="FlyPADController"/> device.
     /// </summary>
     /// <seealso cref="EnableAcquisition"/>
     /// <seealso cref="CapacitanceValues"/>
@@ -288,7 +288,7 @@ namespace Harp.FlyPAD
 
         string INamedElement.Name
         {
-            get => $"{nameof(FlyPAD)}.{GetElementDisplayName(Register)}";
+            get => $"{nameof(FlyPADController)}.{GetElementDisplayName(Register)}";
         }
     }
 
@@ -331,7 +331,7 @@ namespace Harp.FlyPAD
             Register = new EnableAcquisition();
         }
 
-        string INamedElement.Name => $"{nameof(FlyPAD)}.{GetElementDisplayName(Register)}";
+        string INamedElement.Name => $"{nameof(FlyPADController)}.{GetElementDisplayName(Register)}";
     }
 
     /// <summary>
@@ -365,7 +365,7 @@ namespace Harp.FlyPAD
             Register = new EnableAcquisition();
         }
 
-        string INamedElement.Name => $"{nameof(FlyPAD)}.{GetElementDisplayName(Register)}";
+        string INamedElement.Name => $"{nameof(FlyPADController)}.{GetElementDisplayName(Register)}";
     }
 
     /// <summary>
@@ -1182,7 +1182,7 @@ namespace Harp.FlyPAD
             Payload = new CreateEnableAcquisitionPayload();
         }
 
-        string INamedElement.Name => $"{nameof(FlyPAD)}.{GetElementDisplayName(Payload)}";
+        string INamedElement.Name => $"{nameof(FlyPADController)}.{GetElementDisplayName(Payload)}";
     }
 
     /// <summary>
@@ -1215,7 +1215,7 @@ namespace Harp.FlyPAD
         /// <returns>A new message for the EnableAcquisition register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.FlyPAD.EnableAcquisition.FromPayload(messageType, GetPayload());
+            return Harp.FlyPADController.EnableAcquisition.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -1235,7 +1235,7 @@ namespace Harp.FlyPAD
         /// <returns>A new timestamped message for the EnableAcquisition register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.FlyPAD.EnableAcquisition.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.FlyPADController.EnableAcquisition.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -1269,7 +1269,7 @@ namespace Harp.FlyPAD
         /// <returns>A new message for the CapacitanceValues register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.FlyPAD.CapacitanceValues.FromPayload(messageType, GetPayload());
+            return Harp.FlyPADController.CapacitanceValues.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -1289,7 +1289,7 @@ namespace Harp.FlyPAD
         /// <returns>A new timestamped message for the CapacitanceValues register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.FlyPAD.CapacitanceValues.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.FlyPADController.CapacitanceValues.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -1323,7 +1323,7 @@ namespace Harp.FlyPAD
         /// <returns>A new message for the DigitalInputState register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalInputState.FromPayload(messageType, GetPayload());
+            return Harp.FlyPADController.DigitalInputState.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -1343,7 +1343,7 @@ namespace Harp.FlyPAD
         /// <returns>A new timestamped message for the DigitalInputState register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalInputState.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.FlyPADController.DigitalInputState.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -1377,7 +1377,7 @@ namespace Harp.FlyPAD
         /// <returns>A new message for the DigitalOutputSet register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalOutputSet.FromPayload(messageType, GetPayload());
+            return Harp.FlyPADController.DigitalOutputSet.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -1397,7 +1397,7 @@ namespace Harp.FlyPAD
         /// <returns>A new timestamped message for the DigitalOutputSet register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalOutputSet.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.FlyPADController.DigitalOutputSet.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -1431,7 +1431,7 @@ namespace Harp.FlyPAD
         /// <returns>A new message for the DigitalOutputClear register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalOutputClear.FromPayload(messageType, GetPayload());
+            return Harp.FlyPADController.DigitalOutputClear.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -1451,7 +1451,7 @@ namespace Harp.FlyPAD
         /// <returns>A new timestamped message for the DigitalOutputClear register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalOutputClear.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.FlyPADController.DigitalOutputClear.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -1485,7 +1485,7 @@ namespace Harp.FlyPAD
         /// <returns>A new message for the DigitalOutputToggle register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalOutputToggle.FromPayload(messageType, GetPayload());
+            return Harp.FlyPADController.DigitalOutputToggle.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -1505,7 +1505,7 @@ namespace Harp.FlyPAD
         /// <returns>A new timestamped message for the DigitalOutputToggle register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalOutputToggle.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.FlyPADController.DigitalOutputToggle.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -1539,7 +1539,7 @@ namespace Harp.FlyPAD
         /// <returns>A new message for the DigitalOutputState register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalOutputState.FromPayload(messageType, GetPayload());
+            return Harp.FlyPADController.DigitalOutputState.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -1559,7 +1559,7 @@ namespace Harp.FlyPAD
         /// <returns>A new timestamped message for the DigitalOutputState register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.FlyPAD.DigitalOutputState.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.FlyPADController.DigitalOutputState.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -1593,7 +1593,7 @@ namespace Harp.FlyPAD
         /// <returns>A new message for the EnableEvents register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.FlyPAD.EnableEvents.FromPayload(messageType, GetPayload());
+            return Harp.FlyPADController.EnableEvents.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -1613,7 +1613,7 @@ namespace Harp.FlyPAD
         /// <returns>A new timestamped message for the EnableEvents register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.FlyPAD.EnableEvents.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.FlyPADController.EnableEvents.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 

@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>CF.Harp.FlyPADController</Title>
+    <Authors>Hardware and Software Platform, Champalimaud Foundation</Authors>
+    <Copyright>Copyright © 2026</Copyright>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <Description>Bonsai Library containing interfaces for data acquisition and control of FlyPADController devices.</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageType>Dependency;BonsaiLibrary</PackageType>
+    <PackageTags>FlyPADController Bonsai Rx</PackageTags>
+    <RepositoryUrl>https://github.com/fchampalimaud/device.flypadcontroller</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/fchampalimaud/device.flypadcontroller</PackageProjectUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageIcon>cf-logo.png</PackageIcon>
+    <PackageOutputPath></PackageOutputPath>
+    <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <LangVersion>9.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Explicitly opt in to modern resource embedding (required for building .NET Framework projects from .NET SDK) -->
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bonsai.Harp" Version="3.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\device.yml" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' != 'false'">
+      <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\"/>
+      <None Include="$(MSBuildThisFileDirectory)../LICENSE" Pack="true" PackagePath="" Visible="false" />
+      <None Include="$(MSBuildThisFileDirectory)../build/cf-logo.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+</Project>
