@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
-Project("{63123750-1207-4D2E-8BC5-485F6AFFBCFE}") = "FlyPAD", "FlyPAD\FlyPAD.cproj", "{9CE35E3E-9226-45AF-8AA5-8F726C1820B6}"
+Project("{63123750-1207-4D2E-8BC5-485F6AFFBCFE}") = "FlyPADController", "FlyPADController\FlyPADController.cproj", "{9CE35E3E-9226-45AF-8AA5-8F726C1820B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

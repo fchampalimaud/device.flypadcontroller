@@ -6,7 +6,7 @@
 /************************************************************************/
 /* Define identifiers                                                   */
 /************************************************************************/
-#define DEVICE_NAME      "FlyPAD"
+#define DEVICE_NAME      "FlyPADController"
 #define WHO_AM_I         1201
 
 
